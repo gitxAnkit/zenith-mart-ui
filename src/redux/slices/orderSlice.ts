@@ -1,8 +1,19 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import type { Order } from "../../types";
 
-const initialState = {
+interface OrderState {
+    orders: Order[];
+    order: Order | null;
+    loading: boolean;
+    error: string | null;
+    isUpdated: boolean;
+    isDeleted: boolean;
+    totalAmount: number;
+}
+
+const initialState: OrderState = {
     orders: [],
-    order: {},
+    order: null,
     loading: false,
     error: null,
     isUpdated: false,
@@ -17,47 +28,47 @@ const orderSlice = createSlice({
         createOrderRequest: (state) => {
             state.loading = true;
         },
-        createOrderSuccess: (state, action) => {
+        createOrderSuccess: (state, action: PayloadAction<Order>) => {
             state.loading = false;
             state.order = action.payload;
         },
-        createOrderFail: (state, action) => {
+        createOrderFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
         myOrdersRequest: (state) => {
             state.loading = true;
         },
-        myOrdersSuccess: (state, action) => {
+        myOrdersSuccess: (state, action: PayloadAction<Order[]>) => {
             state.loading = false;
             state.orders = action.payload;
         },
-        myOrdersFail: (state, action) => {
+        myOrdersFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
         allOrdersRequest: (state) => {
             state.loading = true;
         },
-        allOrdersSuccess: (state, action) => {
+        allOrdersSuccess: (state, action: PayloadAction<Order[]>) => {
             state.loading = false;
             state.orders = action.payload;
         },
-        allOrdersFail: (state, action) => {
+        allOrdersFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
-        totalOrderAmount: (state, action) => {
+        totalOrderAmount: (state, action: PayloadAction<number>) => {
             state.totalAmount = action.payload;
         },
         updateOrderRequest: (state) => {
             state.loading = true;
         },
-        updateOrderSuccess: (state, action) => {
+        updateOrderSuccess: (state, action: PayloadAction<boolean>) => {
             state.loading = false;
             state.isUpdated = action.payload;
         },
-        updateOrderFail: (state, action) => {
+        updateOrderFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -67,11 +78,11 @@ const orderSlice = createSlice({
         deleteOrderRequest: (state) => {
             state.loading = true;
         },
-        deleteOrderSuccess: (state, action) => {
+        deleteOrderSuccess: (state, action: PayloadAction<boolean>) => {
             state.loading = false;
             state.isDeleted = action.payload;
         },
-        deleteOrderFail: (state, action) => {
+        deleteOrderFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -81,11 +92,11 @@ const orderSlice = createSlice({
         orderDetailsRequest: (state) => {
             state.loading = true;
         },
-        orderDetailsSuccess: (state, action) => {
+        orderDetailsSuccess: (state, action: PayloadAction<Order>) => {
             state.loading = false;
             state.order = action.payload;
         },
-        orderDetailsFail: (state, action) => {
+        orderDetailsFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },

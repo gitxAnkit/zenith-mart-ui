@@ -19,7 +19,7 @@ import VpnKeyIcon from "@mui/icons-material/VpnKey";
 import { createOrder, clearOrderErrors } from "../../actions/orderAction.js";
 import { useNavigate } from "react-router-dom";
 import ErrorBoundary from "../../ErrorBoundary.jsx";
-import api from "../../axiosInstance.js";
+import api from "../../axiosInstance";
 const Payment = () => {
   const { user } = useSelector((state) => state.user);
   const userId = user._id;

@@ -45,7 +45,7 @@ import Contact from "./component/Contact/Contact.jsx";
 import About from "./component/About/About.jsx";
 import NotFound from "./component/layout/NotFound/NotFound.jsx";
 import Loader from "./component/layout/Loader/Loader.jsx";
-import { getStripeApiKey } from "./redux/slices/stripeSlice.js";
+import { getStripeApiKey } from "./redux/slices/stripeSlice";
 
 const App = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);

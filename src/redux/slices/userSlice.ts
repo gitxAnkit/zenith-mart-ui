@@ -1,7 +1,20 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { User } from '../../types';
 
-const initialState = {
-    user: {},
+interface UserState {
+    user: User | null;
+    users: User[];
+    isAuthenticated: boolean;
+    loading: boolean;
+    error: string | null;
+    isUpdated: boolean;
+    isDeleted: boolean;
+    message: string | null;
+    success: boolean | null;
+}
+
+const initialState: UserState = {
+    user: null,
     users: [],
     isAuthenticated: false,
     loading: false,
@@ -23,12 +36,12 @@ const userSlice = createSlice({
             state.loading = true;
             state.isAuthenticated = false;
         },
-        loginSuccess: (state, action) => {
+        loginSuccess: (state, action: PayloadAction<User>) => {
             state.loading = false;
             state.isAuthenticated = true;
             state.user = action.payload;
         },
-        loginFail: (state, action) => {
+        loginFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.isAuthenticated = false;
             state.user = null;
@@ -38,12 +51,12 @@ const userSlice = createSlice({
             state.loading = true;
             state.isAuthenticated = false;
         },
-        registerUserSuccess: (state, action) => {
+        registerUserSuccess: (state, action: PayloadAction<User>) => {
             state.loading = false;
             state.isAuthenticated = true;
             state.user = action.payload;
         },
-        registerUserFail: (state, action) => {
+        registerUserFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.isAuthenticated = false;
             state.user = null;
@@ -53,12 +66,12 @@ const userSlice = createSlice({
             state.loading = true;
             state.isAuthenticated = false;
         },
-        loadUserSuccess: (state, action) => {
+        loadUserSuccess: (state, action: PayloadAction<User>) => {
             state.loading = false;
             state.isAuthenticated = true;
             state.user = action.payload;
         },
-        loadUserFail: (state, action) => {
+        loadUserFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.isAuthenticated = false;
             state.user = null;
@@ -69,7 +82,7 @@ const userSlice = createSlice({
             state.user = null;
             state.isAuthenticated = false;
         },
-        logoutFail: (state, action) => {
+        logoutFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -79,12 +92,12 @@ const userSlice = createSlice({
         updateProfileRequest: (state) => {
             state.loading = true;
         },
-        updateProfileSuccess: (state, action) => {
+        updateProfileSuccess: (state, action: PayloadAction<boolean>) => {
             state.loading = false;
             state.isUpdated = action.payload;
             state.isUpdated = true;
         },
-        updateProfileFail: (state, action) => {
+        updateProfileFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -95,11 +108,11 @@ const userSlice = createSlice({
         updatePasswordRequest: (state) => {
             state.loading = true;
         },
-        updatePasswordSuccess: (state, action) => {
+        updatePasswordSuccess: (state, action: PayloadAction<boolean>) => {
             state.loading = false;
             state.isUpdated = action.payload;
         },
-        updatePasswordFail: (state, action) => {
+        updatePasswordFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -113,11 +126,11 @@ const userSlice = createSlice({
             state.loading = true;
             state.error = null;
         },
-        forgotPasswordSuccess: (state, action) => {
+        forgotPasswordSuccess: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.message = action.payload;
         },
-        forgotPasswordFail: (state, action) => {
+        forgotPasswordFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -125,11 +138,11 @@ const userSlice = createSlice({
             state.loading = true;
             state.error = null;
         },
-        resetPasswordSuccess: (state, action) => {
+        resetPasswordSuccess: (state, action: PayloadAction<boolean>) => {
             state.loading = false;
             state.success = action.payload;
         },
-        resetPasswordFail: (state, action) => {
+        resetPasswordFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -139,11 +152,11 @@ const userSlice = createSlice({
         allUsersRequest: (state) => {
             state.loading = true;
         },
-        allUsersSuccess: (state, action) => {
+        allUsersSuccess: (state, action: PayloadAction<User[]>) => {
             state.loading = false;
             state.users = action.payload;
         },
-        allUsersFail: (state, action) => {
+        allUsersFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -153,23 +166,23 @@ const userSlice = createSlice({
         userDetailsRequest: (state) => {
             state.loading = true;
         },
-        userDetailsSuccess: (state, action) => {
+        userDetailsSuccess: (state, action: PayloadAction<User>) => {
             state.loading = false;
             state.user = action.payload;
         },
-        userDetailsFail: (state, action) => {
+        userDetailsFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
         deleteUserRequest: (state) => {
             state.loading = true;
         },
-        deleteUserSuccess: (state, action) => {
+        deleteUserSuccess: (state, action: PayloadAction<{ success: boolean; message: string }>) => {
             state.loading = false;
             state.isDeleted = action.payload.success;
             state.message = action.payload.message;
         },
-        deleteUserFail: (state, action) => {
+        deleteUserFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },
@@ -179,11 +192,11 @@ const userSlice = createSlice({
         updateUserRequest: (state) => {
             state.loading = true;
         },
-        updateUserSuccess: (state, action) => {
+        updateUserSuccess: (state, action: PayloadAction<boolean>) => {
             state.loading = false;
             state.isUpdated = action.payload;
         },
-        updateUserFail: (state, action) => {
+        updateUserFail: (state, action: PayloadAction<string>) => {
             state.loading = false;
             state.error = action.payload;
         },

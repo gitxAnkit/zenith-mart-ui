@@ -1,4 +1,4 @@
-// store.js
+// store.ts
 
 import { configureStore } from '@reduxjs/toolkit';
 import productsSlice from './slices/product/productsSlice';
@@ -11,14 +11,15 @@ import cartSlice from './slices/cartSlice';
 import orderSlice from './slices/orderSlice';
 import userSlice from './slices/userSlice';
 import stripeSlice from './slices/stripeSlice';
+
 // Preload state from localStorage
 const preloadedState = {
     cart: {
         cartItems: localStorage.getItem('cartItems')
-            ? JSON.parse(localStorage.getItem('cartItems'))
+            ? JSON.parse(localStorage.getItem('cartItems') as string)
             : [],
         shippingInfo: localStorage.getItem('shippingInfo')
-            ? JSON.parse(localStorage.getItem('shippingInfo'))
+            ? JSON.parse(localStorage.getItem('shippingInfo') as string)
             : {},
     },
 };
@@ -34,7 +35,7 @@ const store = configureStore({
         cart: cartSlice,
         order: orderSlice,
         user: userSlice,
-        stripe: stripeSlice
+        stripe: stripeSlice,
     },
     devTools: process.env.NODE_ENV !== 'production',
     preloadedState,
@@ -46,5 +47,9 @@ store.subscribe(() => {
     localStorage.setItem('cartItems', JSON.stringify(cart.cartItems));
     localStorage.setItem('shippingInfo', JSON.stringify(cart.shippingInfo));
 });
+
+// ── TypeScript types ──────────────────────────────────────────────────────────
+export type RootState = ReturnType<typeof store.getState>;
+export type AppDispatch = typeof store.dispatch;
 
 export default store;
