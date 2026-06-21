@@ -14,8 +14,8 @@
     "noEmit": true,
     "jsx": "react-jsx",
 
-    /* JS interop — allows .jsx files to coexist during migration */
-    "allowJs": true,
+    /* JS interop — migration complete */
+    "allowJs": false,
     "checkJs": false,
 
     /* Path aliases */
@@ -24,10 +24,10 @@
       "@/*": ["src/*"]
     },
 
-    /* Linting — non-strict during migration, tightened in Phase 6 */
-    "strict": false,
-    "noUnusedLocals": false,
-    "noUnusedParameters": false,
+    /* Strict Type Checking */
+    "strict": true,
+    "noUnusedLocals": true,
+    "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true
   },
   "include": ["src"],

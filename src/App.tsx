@@ -1,85 +1,76 @@
-import React, { useEffect, useState } from "react";
-import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
-import { ToastContainer } from "react-toastify";
-import "react-toastify/dist/ReactToastify.css";
-import WebFont from "webfontloader";
-import Header from "./component/layout/Header/Header.jsx";
-import Footer from "./component/layout/Footer/Footer.jsx";
-import Home from "./component/Home/Home.jsx";
-import ErrorBoundary from "./ErrorBoundary.jsx";
-import { HelmetProvider } from "react-helmet-async";
-import ProductDetails from "./component/Product/ProductDetails.jsx";
-import "./App.css";
-import Products from "./component/Product/Products.jsx";
-import Search from "./component/Product/Search.jsx";
-import LoginSignUp from "./component/User/LoginSignUp.jsx";
-import UserOptions from "./component/layout/Header/UserOptions.jsx";
-import { useDispatch, useSelector } from "react-redux";
-import Profile from "./component/User/Profile.jsx";
-import ProtectedRoute from "./component/Route/ProtectedRoute.jsx";
-import { loadUser } from "./actions/userAction.js";
-import UpdateProfile from "./component/User/UpdateProfile.jsx";
-import UpdatePassword from "./component/User/UpdatePassword.jsx";
-import ForgotPassword from "./component/User/ForgotPassword.jsx";
-import ResetPassword from "./component/User/ResetPassword.jsx";
-import Cart from "./component/Cart/Cart.jsx";
-import Shipping from "./component/Cart/Shipping.jsx";
-import ConfirmOrder from "./component/Cart/ConfirmOrder.jsx";
-import Payment from "./component/Cart/Payment.jsx";
-import { loadStripe } from "@stripe/stripe-js";
-import { Elements } from "@stripe/react-stripe-js";
-import OrderSuccess from "./component/Cart/OrderSuccess.jsx";
-import MyOrders from "./component/Order/MyOrders.jsx";
-import OrderDetails from "./component/Order/OrderDetails.jsx";
-import Dashboard from "./component/Admin/Dashboard.jsx";
-import ProductList from "./component/Admin/ProductList.jsx";
-import NewProduct from "./component/Admin/NewProduct.jsx";
-import UpdateProduct from "./component/Admin/UpdateProduct.jsx";
-import ProductReviews from "./component/Admin/ProductReview.jsx";
-import OrderList from "./component/Admin/OrderList.jsx";
-import ProcessOrder from "./component/Admin/ProcessOrder.jsx";
-import UsersList from "./component/Admin/UsersList.jsx";
-import UpdateUser from "./component/Admin/UpdateUser.jsx";
-import AccessDenied from "./component/Route/AccessDenied.jsx";
-import Contact from "./component/Contact/Contact.jsx";
-import About from "./component/About/About.jsx";
-import NotFound from "./component/layout/NotFound/NotFound.jsx";
-import Loader from "./component/layout/Loader/Loader.jsx";
-import { getStripeApiKey } from "./redux/slices/stripeSlice.js";
+import React, { useEffect } from 'react';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import WebFont from 'webfontloader';
+import Header from './component/layout/Header/Header';
+import Footer from './component/layout/Footer/Footer';
+import Home from './component/Home/Home';
+import ErrorBoundary from './ErrorBoundary';
+import { HelmetProvider } from 'react-helmet-async';
+import ProductDetails from './component/Product/ProductDetails';
+import './App.css';
+import Products from './component/Product/Products';
+import Search from './component/Product/Search';
+import LoginSignUp from './component/User/LoginSignUp';
+import UserOptions from './component/layout/Header/UserOptions';
+import { useAppSelector } from './redux/hooks';
+import { useLoadUser } from './hooks/useAuth';
+import Profile from './component/User/Profile';
+import ProtectedRoute from './component/Route/ProtectedRoute';
+import UpdateProfile from './component/User/UpdateProfile';
+import UpdatePassword from './component/User/UpdatePassword';
+import ForgotPassword from './component/User/ForgotPassword';
+import ResetPassword from './component/User/ResetPassword';
+import Cart from './component/Cart/Cart';
+import Shipping from './component/Cart/Shipping';
+import ConfirmOrder from './component/Cart/ConfirmOrder';
+import Payment from './component/Cart/Payment';
+import OrderSuccess from './component/Cart/OrderSuccess';
+import MyOrders from './component/Order/MyOrders';
+import OrderDetails from './component/Order/OrderDetails';
+import Dashboard from './component/Admin/Dashboard';
+import ProductList from './component/Admin/ProductList';
+import NewProduct from './component/Admin/NewProduct';
+import UpdateProduct from './component/Admin/UpdateProduct';
+import ProductReviews from './component/Admin/ProductReview';
+import OrderList from './component/Admin/OrderList';
+import ProcessOrder from './component/Admin/ProcessOrder';
+import UsersList from './component/Admin/UsersList';
+import UpdateUser from './component/Admin/UpdateUser';
+import AccessDenied from './component/Route/AccessDenied';
+import Contact from './component/Contact/Contact';
+import About from './component/About/About';
+import NotFound from './component/layout/NotFound/NotFound';
+import Loader from './component/layout/Loader/Loader';
 
-const App = () => {
-  const { user, isAuthenticated } = useSelector((state) => state.user);
-  const { stripeApiKey, loading } = useSelector((state) => state.stripe);
-  const [stripePromise, setStripePromise] = useState(null);
+// Payment is wrapped with <Elements> inside Payment.tsx itself (uses useStripeApiKey)
+import { Elements } from '@stripe/react-stripe-js';
+import { loadStripe } from '@stripe/stripe-js';
 
-  const dispatch = useDispatch();
+const App: React.FC = () => {
+  const { user, isAuthenticated, loading } = useAppSelector((state) => state.user);
+
+  // Replaces dispatch(loadUser()) — auto-runs on mount, syncs to Redux
+  useLoadUser();
 
   useEffect(() => {
     WebFont.load({
-      google: {
-        families: ["Roboto", "Droid Sans", "Chilanka"],
-      },
+      google: { families: ['Roboto', 'Droid Sans', 'Chilanka'] },
     });
-    dispatch(loadUser());
-    dispatch(getStripeApiKey());
-  }, [dispatch]);
+    window.addEventListener('contextmenu', (e) => e.preventDefault());
+  }, []);
 
-  useEffect(() => {
-    if (stripeApiKey) {
-      setStripePromise(loadStripe(stripeApiKey));
-    }
-  }, [stripeApiKey]);
-
-  window.addEventListener("contextmenu", (e) => e.preventDefault());
   if (loading) {
     return <Loader />;
   }
+
   return (
     <HelmetProvider>
       <Router>
         <ErrorBoundary>
           <Header />
-          {isAuthenticated && <UserOptions user={user} />}
+          {isAuthenticated && user && <UserOptions user={user} />}
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/product/:id" element={<ProductDetails />} />
@@ -93,7 +84,7 @@ const App = () => {
             <Route path="/contact" element={<Contact />} />
             <Route path="/about" element={<About />} />
 
-            {/* Protected Routes */}
+            {/* Protected user routes */}
             <Route element={<ProtectedRoute isAdmin={false} />}>
               <Route path="/account" element={<Profile />} />
               <Route path="/me/update" element={<UpdateProfile />} />
@@ -104,17 +95,18 @@ const App = () => {
               <Route path="/success" element={<OrderSuccess />} />
               <Route path="/orders" element={<MyOrders />} />
               <Route path="/order/:id" element={<OrderDetails />} />
-              {stripePromise && (
-                <Route
-                  path="/process/payment"
-                  element={
-                    <Elements stripe={loadStripe(stripeApiKey)}>
-                      <Payment />
-                    </Elements>
-                  }
-                />
-              )}
+              {/* Payment: stripe key fetched inside Payment.tsx via useStripeApiKey */}
+              <Route
+                path="/process/payment"
+                element={
+                  <Elements stripe={loadStripe(import.meta.env.VITE_STRIPE_KEY ?? '')}>
+                    <Payment />
+                  </Elements>
+                }
+              />
             </Route>
+
+            {/* Protected admin routes */}
             <Route element={<ProtectedRoute isAdmin={true} />}>
               <Route path="/admin/dashboard" element={<Dashboard />} />
               <Route path="/admin/products" element={<ProductList />} />
