@@ -1,0 +1,32 @@
+* {
+    margin: 0;
+    scroll-behavior: smooth;
+  }
+  
+  body {
+    cursor: url("./images/cursor.png"), auto;
+  }
+  
+/* Remove spin buttons for Chrome, Safari, Edge, Opera */
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+/* For Firefox */
+input[type="number"] {
+  -moz-appearance: textfield; /* Remove default appearance */
+  appearance: none !important;/* Ensure compatibility across newer browsers */
+}
+
+/* Additional rule to fully remove Firefox spinner */
+input[type="number"]::-moz-focus-inner {
+  border: 0;
+  padding: 0;
+}
+.greenColor {
+    color: green !important;
+  }
+.redColor {
+    color: red !important;
+  }
