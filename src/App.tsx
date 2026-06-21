@@ -3,10 +3,10 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import WebFont from "webfontloader";
-import Header from "./component/layout/Header/Header";
-import Footer from "./component/layout/Footer/Footer";
-import Home from "./component/Home/Home";
-import ErrorBoundary from "./ErrorBoundary";
+import Header from "./component/layout/Header/Header.jsx";
+import Footer from "./component/layout/Footer/Footer.jsx";
+import Home from "./component/Home/Home.jsx";
+import ErrorBoundary from "./ErrorBoundary.jsx";
 import { HelmetProvider } from "react-helmet-async";
 import ProductDetails from "./component/Product/ProductDetails.jsx";
 import "./App.css";
@@ -45,7 +45,7 @@ import Contact from "./component/Contact/Contact.jsx";
 import About from "./component/About/About.jsx";
 import NotFound from "./component/layout/NotFound/NotFound.jsx";
 import Loader from "./component/layout/Loader/Loader.jsx";
-import { getStripeApiKey } from "./redux/slices/stripeSlice";
+import { getStripeApiKey } from "./redux/slices/stripeSlice.js";
 
 const App = () => {
   const { user, isAuthenticated } = useSelector((state) => state.user);
