@@ -1,15 +1,15 @@
-import React, { Fragment, useRef, useState, useEffect } from 'react';
-import './LoginSignUp.css';
-import { Link, useNavigate, useLocation } from 'react-router-dom';
-import MailOutlineIcon from '@mui/icons-material/MailOutline';
-import LockOpenIcon from '@mui/icons-material/LockOpen';
-import FaceIcon from '@mui/icons-material/Face';
-import { useAppSelector } from '../../redux/hooks';
-import { useLogin, useRegister } from '../../hooks/useAuth';
-import { toast } from 'react-toastify';
-import Loader from '../layout/Loader/Loader';
-import ErrorBoundary from '../../ErrorBoundary';
-import Resizer from 'react-image-file-resizer';
+import React, { Fragment, useRef, useState, useEffect } from "react";
+import "./LoginSignUp.css";
+import { Link, useNavigate, useLocation } from "react-router-dom";
+import MailOutlineIcon from "@mui/icons-material/MailOutline";
+import LockOpenIcon from "@mui/icons-material/LockOpen";
+import FaceIcon from "@mui/icons-material/Face";
+import { useAppSelector } from "../../redux/hooks";
+import { useLogin, useRegister } from "../../hooks/useAuth";
+import { toast } from "react-toastify";
+import Loader from "../layout/Loader/Loader";
+import ErrorBoundary from "../../ErrorBoundary";
+import Resizer from "react-image-file-resizer";
 
 const LoginSignUp: React.FC = () => {
   const navigate = useNavigate();
@@ -23,16 +23,16 @@ const LoginSignUp: React.FC = () => {
   const registerTab = useRef<HTMLFormElement>(null);
   const switcherTab = useRef<HTMLButtonElement>(null);
 
-  const [loginEmail, setLoginEmail] = useState('');
-  const [loginPassword, setLoginPassword] = useState('');
+  const [loginEmail, setLoginEmail] = useState("");
+  const [loginPassword, setLoginPassword] = useState("");
 
-  const [user, setUser] = useState({ name: '', email: '', password: '' });
+  const [user, setUser] = useState({ name: "", email: "", password: "" });
   const { name, email, password } = user;
 
-  const [avatar, setAvatar] = useState('/Profile.png');
-  const [avatarPreview, setAvatarPreview] = useState('/Profile.png');
+  const [avatar, setAvatar] = useState("/Profile.png");
+  const [avatarPreview, setAvatarPreview] = useState("/Profile.png");
 
-  const redirect = location.search ? `/${location.search.split('=')[1]}` : '/account';
+  const redirect = location.search ? `/${location.search.split("=")[1]}` : "/";
 
   useEffect(() => {
     if (isAuthenticated) {
@@ -43,15 +43,19 @@ const LoginSignUp: React.FC = () => {
   // Show toast on mutation errors
   useEffect(() => {
     if (loginMutation.error) {
-      const err = loginMutation.error as { response?: { data?: { message?: string } } };
-      toast.error(err?.response?.data?.message ?? 'Login failed');
+      const err = loginMutation.error as {
+        response?: { data?: { message?: string } };
+      };
+      toast.error(err?.response?.data?.message ?? "Login failed");
     }
   }, [loginMutation.error]);
 
   useEffect(() => {
     if (registerMutation.error) {
-      const err = registerMutation.error as { response?: { data?: { message?: string } } };
-      toast.error(err?.response?.data?.message ?? 'Registration failed');
+      const err = registerMutation.error as {
+        response?: { data?: { message?: string } };
+      };
+      toast.error(err?.response?.data?.message ?? "Registration failed");
     }
   }, [registerMutation.error]);
 
@@ -63,24 +67,29 @@ const LoginSignUp: React.FC = () => {
   const registerSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     const myForm = new FormData();
-    myForm.set('name', name);
-    myForm.set('email', email);
-    myForm.set('password', password);
-    myForm.set('avatar', avatar);
+    myForm.set("name", name);
+    myForm.set("email", email);
+    myForm.set("password", password);
+    myForm.set("avatar", avatar);
     registerMutation.mutate(myForm);
   };
 
   const registerDataChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.name === 'avatar') {
+    if (e.target.name === "avatar") {
       const file = e.target.files?.[0];
       if (file) {
         Resizer.imageFileResizer(
-          file, 300, 300, 'JPEG', 80, 0,
+          file,
+          300,
+          300,
+          "JPEG",
+          80,
+          0,
           (uri) => {
             setAvatarPreview(uri as string);
             setAvatar(uri as string);
           },
-          'base64'
+          "base64",
         );
       }
     } else {
@@ -89,17 +98,17 @@ const LoginSignUp: React.FC = () => {
   };
 
   const switchTabs = (_e: React.MouseEvent, tab: string) => {
-    if (tab === 'login') {
-      switcherTab.current?.classList.add('shiftToNeutral');
-      switcherTab.current?.classList.remove('shiftToRight');
-      registerTab.current?.classList.remove('shiftToNeutralForm');
-      loginTab.current?.classList.remove('shiftToLeft');
+    if (tab === "login") {
+      switcherTab.current?.classList.add("shiftToNeutral");
+      switcherTab.current?.classList.remove("shiftToRight");
+      registerTab.current?.classList.remove("shiftToNeutralForm");
+      loginTab.current?.classList.remove("shiftToLeft");
     }
-    if (tab === 'register') {
-      switcherTab.current?.classList.add('shiftToRight');
-      switcherTab.current?.classList.remove('shiftToNeutral');
-      registerTab.current?.classList.add('shiftToNeutralForm');
-      loginTab.current?.classList.add('shiftToLeft');
+    if (tab === "register") {
+      switcherTab.current?.classList.add("shiftToRight");
+      switcherTab.current?.classList.remove("shiftToNeutral");
+      registerTab.current?.classList.add("shiftToNeutralForm");
+      loginTab.current?.classList.add("shiftToLeft");
     }
   };
 
@@ -116,12 +125,16 @@ const LoginSignUp: React.FC = () => {
               <div className="LoginSignUpBox">
                 <div>
                   <div className="login_signUp_toggle">
-                    <p onClick={(e) => switchTabs(e, 'login')}>LOGIN</p>
-                    <p onClick={(e) => switchTabs(e, 'register')}>REGISTER</p>
+                    <p onClick={(e) => switchTabs(e, "login")}>LOGIN</p>
+                    <p onClick={(e) => switchTabs(e, "register")}>REGISTER</p>
                   </div>
                   <button ref={switcherTab}></button>
                 </div>
-                <form className="loginForm" ref={loginTab} onSubmit={loginSubmit}>
+                <form
+                  className="loginForm"
+                  ref={loginTab}
+                  onSubmit={loginSubmit}
+                >
                   <div className="loginEmail">
                     <MailOutlineIcon />
                     <input

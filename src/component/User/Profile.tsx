@@ -24,28 +24,54 @@ const Profile: React.FC = () => {
           {user && (
             <>
               <MetaData title={`${user.name}'s Profile`} />
-              <div className="profileContainer">
-                <div>
-                  <h1>My Profile</h1>
-                  <img src={user.avatar?.url} alt={user.name} />
-                  <Link to="/me/update">Edit Profile</Link>
+              <div className="profilePage">
+                <div className="profileHeader">
+                  <h1>My Account</h1>
                 </div>
-                <div>
-                  <div>
-                    <h4>Full Name</h4>
-                    <p>{user.name}</p>
+
+                <div className="profileContainer">
+                  {/* Left Side: Avatar & Edit Profile */}
+                  <div className="profileLeft">
+                    <div className="avatarContainer">
+                      <img src={user.avatar?.url || "/Profile.png"} alt={user.name} />
+                    </div>
+                    <Link to="/me/update" className="editProfileBtn">
+                      Edit Profile
+                    </Link>
                   </div>
-                  <div>
-                    <h4>Email</h4>
-                    <p>{user.email}</p>
+
+                  {/* Right Side: Details */}
+                  <div className="profileRight">
+                    <div className="detailsGroup">
+                      <h4>Full Name</h4>
+                      <p>{user.name}</p>
+                    </div>
+                    <div className="detailsGroup">
+                      <h4>Email</h4>
+                      <p>{user.email}</p>
+                    </div>
+                    <div className="detailsGroup">
+                      <h4>Joined</h4>
+                      <p>
+                        {new Date(user.createdAt).toLocaleDateString("en-US", {
+                          year: "numeric",
+                          month: "short",
+                        })}
+                      </p>
+                    </div>
                   </div>
-                  <div>
-                    <h4>Joined On</h4>
-                    <p>{String(user.createdAt).slice(0, 10)}</p>
-                  </div>
-                  <div>
-                    <Link to="/orders">My Orders</Link>
-                    <Link to="/password/update">Change Password</Link>
+                </div>
+
+                {/* Quick Actions Container at the bottom */}
+                <div className="quickActionsContainer">
+                  <h3>Quick Actions</h3>
+                  <div className="actionButtons">
+                    <Link to="/orders" className="actionBtn">
+                      My Orders
+                    </Link>
+                    <Link to="/password/update" className="actionBtn">
+                      Change Password
+                    </Link>
                   </div>
                 </div>
               </div>

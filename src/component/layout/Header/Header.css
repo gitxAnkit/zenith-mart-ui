@@ -1,11 +1,329 @@
 .speedDial {
-    position: fixed;
-    right: 3vmax;
-    top: 3vmax;
+  position: relative;
+  margin-left: 2vmax;
+}
+
+.speedDialIcon {
+  width: 32px;
+  height: 32px;
+  border-radius: 100%;
+  object-fit: cover;
+}
+
+/* Custom speed dial overrides inside the nav-bar */
+.nav-bar .speedDial {
+  display: flex;
+  align-items: center;
+}
+
+.nav-bar .speedDial .MuiSpeedDial-fab {
+  width: 36px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  background-color: transparent !important;
+  box-shadow: none !important;
+  border: 2px solid rgba(255, 255, 255, 0.8) !important;
+  padding: 0 !important;
+  transition: border-color 0.3s ease, transform 0.2s ease !important;
+}
+
+.nav-bar .speedDial .MuiSpeedDial-fab:hover {
+  border-color: #eb4034 !important;
+  transform: scale(1.05);
+}
+
+.nav-bar .speedDialIcon {
+  width: 30px !important;
+  height: 30px !important;
+  border-radius: 50%;
+}
+
+.nav-bar .speedDial .MuiSpeedDial-actions {
+  position: absolute;
+  top: 48px;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-top: 8px !important;
+}
+
+.nav-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0f172a;
+  padding: 0 4vmax;
+  height: 75px;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 1000;
+  box-sizing: border-box;
+}
+
+/* Brand Logo */
+.logo-div a {
+  font-family: 'Roboto', sans-serif;
+  font-size: 2.2vmax;
+  font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
+  letter-spacing: -0.5px;
+  transition: color 0.3s ease;
+}
+
+.logo-div a:hover {
+  color: #eb4034;
+}
+
+/* Links */
+.links-div ul {
+  display: flex;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.links-div ul li {
+  margin: 0 1.5vmax;
+}
+
+.links-div ul li a {
+  text-decoration: none;
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.1vmax;
+  font-weight: 500;
+  font-family: 'Roboto', sans-serif;
+  transition: color 0.3s ease;
+}
+
+.links-div ul li a:hover {
+  color: #eb4034;
+}
+
+/* Icons */
+.icons-div {
+  display: flex;
+  align-items: center;
+}
+
+.nav-icon {
+  color: rgba(255, 255, 255, 0.85);
+  font-size: 1.3vmax;
+  margin-left: 2vmax;
+  transition: color 0.3s ease, transform 0.2s ease;
+  display: flex;
+  align-items: center;
+  position: relative;
+  text-decoration: none;
+}
+
+.nav-icon:hover {
+  color: #eb4034;
+  transform: scale(1.08);
+}
+
+/* Cart Icon Badge */
+.cart-icon-container {
+  position: relative;
+}
+
+.cart-badge {
+  position: absolute;
+  top: -8px;
+  right: -10px;
+  background-color: #eb4034;
+  color: #ffffff;
+  font-size: 9px;
+  font-weight: 700;
+  width: 15px;
+  height: 15px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.main-content {
+  padding-top: 75px;
+}
+
+@media screen and (max-width: 768px) {
+  .nav-bar {
+    padding: 0 2vmax;
+    height: 65px;
   }
-  
-  .speedDialIcon {
-    width: 56px;
-    height: 56px;
-    border-radius: 100%;
+
+  .logo-div a {
+    font-size: 2.8vmax;
   }
+
+  .links-div ul li {
+    margin: 0 1vmax;
+  }
+
+  .links-div ul li a {
+    font-size: 1.4vmax;
+  }
+
+  .nav-icon {
+    font-size: 1.8vmax;
+    margin-left: 1.5vmax;
+  }
+
+  .main-content {
+    padding-top: 65px;
+  }
+
+  .navbar-search-box input {
+    width: 100px;
+  }
+  .navbar-search-box input:focus {
+    width: 130px;
+  }
+  .search-results-dropdown {
+    width: 250px;
+  }
+}
+
+/* Inline Search Box Styles */
+.search-container {
+  position: relative;
+  margin-left: 1.5vmax;
+}
+
+.navbar-search-box {
+  display: flex;
+  align-items: center;
+  background-color: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 4px;
+  padding: 5px 12px;
+  transition: all 0.3s ease;
+}
+
+.navbar-search-box:focus-within {
+  background-color: rgba(255, 255, 255, 0.18);
+  border-color: #eb4034;
+  box-shadow: 0 0 8px rgba(235, 64, 52, 0.35);
+}
+
+.navbar-search-box input {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: white;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.9rem;
+  width: 140px;
+  transition: width 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.navbar-search-box input::placeholder {
+  color: rgba(255, 255, 255, 0.55);
+}
+
+.navbar-search-box input:focus {
+  width: 200px;
+}
+
+.search-btn {
+  background: transparent;
+  border: none;
+  color: rgba(255, 255, 255, 0.8);
+  cursor: pointer;
+  font-size: 0.95rem;
+  display: flex;
+  align-items: center;
+  padding: 0;
+  margin-left: 8px;
+  transition: color 0.3s ease;
+}
+
+.search-btn:hover {
+  color: #eb4034;
+}
+
+/* Suggestions Dropdown */
+.search-results-dropdown {
+  position: absolute;
+  top: calc(100% + 8px);
+  right: 0;
+  width: 300px;
+  background-color: #ffffff;
+  border-radius: 6px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+  border: 1px solid #f1f5f9;
+  z-index: 1010;
+  max-height: 350px;
+  overflow-y: auto;
+  animation: fadeInDown 0.2s ease-out;
+}
+
+.search-result-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 14px;
+  text-decoration: none;
+  border-bottom: 1px solid #f1f5f9;
+  transition: background-color 0.2s ease;
+}
+
+.search-result-item:last-child {
+  border-bottom: none;
+}
+
+.search-result-item:hover {
+  background-color: #f8fafc;
+}
+
+.search-result-item img {
+  width: 36px;
+  height: 36px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+.result-details {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+}
+
+.result-name {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #0f172a;
+  line-height: 1.3;
+}
+
+.result-price {
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  color: #eb4034;
+  font-weight: 600;
+  margin-top: 2px;
+}
+
+.no-result {
+  padding: 14px;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.85rem;
+  color: #64748b;
+  text-align: center;
+}
+
+@keyframes fadeInDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

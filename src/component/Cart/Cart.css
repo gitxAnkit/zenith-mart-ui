@@ -10,75 +10,94 @@
 }
 .emptyCart > svg {
   font-size: 5vmax;
-  color: tomato;
+  color: #eb4034;
 }
 .emptyCart > p {
   font-size: 2vmax;
+  font-family: 'Roboto', sans-serif;
+  margin: 1.5rem 0;
+  color: #0f172a;
 }
 .emptyCart > a {
-  background-color: rgb(51, 51, 51);
+  background-color: #eb4034;
   color: white;
   border: none;
   padding: 1vmax 3vmax;
   cursor: pointer;
-  font: 400 1vmax "Roboto";
+  font: 500 1vmax "Roboto", sans-serif;
   text-decoration: none;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+.emptyCart > a:hover {
+  background-color: #0f172a;
 }
 
 .cartPage {
-  padding: 5vmax;
+  padding: 2rem 2rem 5rem 2rem;
+  max-width: 1200px;
+  margin: 0 auto;
+  min-height: 65vh;
+  box-sizing: border-box;
 }
 
 .cartHeader {
-  background-color: tomato;
-  width: 90%;
+  background-color: #eb4034; /* brand red */
+  width: 100%;
   box-sizing: border-box;
-  margin: auto;
   color: white;
   display: grid;
   grid-template-columns: 4fr 1fr 1fr;
-  font: 300 0.7vmax "Roboto";
+  font: 500 0.95rem "Roboto", sans-serif;
+  border-radius: 4px;
 }
 .cartHeader > p {
-  margin: 10px;
+  margin: 12px 16px;
 }
 .cartHeader > p:last-child {
   text-align: end;
 }
 
 .cartContainer {
-  width: 90%;
-  margin: auto;
+  width: 100%;
   display: grid;
   grid-template-columns: 4fr 1fr 1fr;
+  border-bottom: 1px solid #f1f5f9;
+  padding: 1.5rem 0;
+  align-items: center;
 }
 
 .cartInput {
   display: flex;
   align-items: center;
   height: 8vmax;
+  gap: 4px;
 }
 
-.cartInput > button {
-  border: none;
-  background-color: rgba(0, 0, 0, 0.616);
-  padding: 0.5vmax;
-  cursor: pointer;
-  color: white;
-  transition: all 0.5s;
+.cartInput button {
+  min-width: 28px !important;
+  width: 28px !important;
+  height: 28px !important;
+  padding: 0 !important;
+  background-color: #0f172a !important; /* dark slate */
+  color: white !important;
+  font-weight: 700 !important;
+  border-radius: 4px !important;
 }
-.cartInput > button:hover {
-  background-color: rgba(0, 0, 0, 0.767);
+
+.cartInput button:hover {
+  background-color: #eb4034 !important; /* brand red hover */
 }
 
 .cartInput > input {
-  border: none;
-  padding:1vmax;
-  width: 4vmax;
+  border: 1px solid #e2e8f0;
+  border-radius: 4px;
+  padding: 4px;
+  width: 36px;
   text-align: center;
   outline: none;
-  font: 400 1vmax "Roboto";
-  color: rgba(0, 0, 0, 0.74);
+  font: 500 0.95rem "Roboto", sans-serif;
+  color: #0f172a;
 }
 
 .cartSubtotal {
@@ -87,92 +106,100 @@
   height: 8vmax;
   align-items: center;
   box-sizing: border-box;
-  font: 300 1vmax cursive;
+  font: 600 1.05rem "Roboto", sans-serif;
   justify-content: flex-end;
-  color: rgba(0, 0, 0, 0.753);
+  color: #0f172a;
 }
 
 .cartGrossProfit {
-  display: grid;
-  grid-template-columns: 2fr 1.2fr;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-top: 2rem;
+  gap: 1.5rem;
 }
 
 .cartGrossProfitBox {
-  border-top: 3px solid tomato;
-  margin: 1vmax 4vmax;
+  border-top: 2px solid #eb4034;
   box-sizing: border-box;
-  padding: 2vmax 0;
-  font: 300 1vmax "Roboto";
+  padding-top: 1.5rem;
+  font: 600 1.15rem "Roboto", sans-serif;
   display: flex;
   justify-content: space-between;
+  width: 320px;
+  color: #0f172a;
 }
 
 .checkOutBtn {
-  display: flex;
-  justify-content: flex-end;
-}
-.checkOutBtn > button {
-  background-color: tomato;
-  color: white;
-  border: none;
-  padding: 0.8vmax 4vmax;
-  width: 50%;
-  font: 300 0.8vmax "Roboto";
-  margin: 1vmax 4vmax;
-  cursor: pointer;
-  border-radius: 30px;
+  width: 320px;
 }
 
-@media screen and (max-width: 600px) {
+.checkOutBtn > button {
+  background-color: #eb4034 !important; /* brand red */
+  color: white !important;
+  border: none;
+  padding: 12px 0 !important;
+  width: 100% !important;
+  font: 600 1rem "Roboto", sans-serif !important;
+  cursor: pointer;
+  border-radius: 4px !important;
+  text-transform: uppercase;
+  transition: all 0.3s ease !important;
+  box-shadow: 0 4px 12px rgba(235, 64, 52, 0.2) !important;
+}
+
+.checkOutBtn > button:hover {
+  background-color: #0f172a !important; /* dark slate hover */
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.2) !important;
+}
+
+@media screen and (max-width: 768px) {
   .cartPage {
-    padding: 0;
+    padding: 1.5rem 1rem;
     min-height: 60vh;
   }
 
   .cartHeader {
     width: 100%;
-    font: 300 1.7vmax "Roboto";
-    grid-template-columns: 3fr 1fr 1fr;
+    font: 500 0.85rem "Roboto", sans-serif;
+    grid-template-columns: 3fr 1.2fr 1fr;
+  }
+  .cartHeader > p {
+    margin: 10px 8px;
   }
 
   .cartContainer {
     width: 100%;
-    grid-template-columns: 3fr 1fr 1fr;
+    grid-template-columns: 3fr 1.2fr 1fr;
   }
 
   .cartInput {
-    height: 20vmax;
-  }
-
-  .cartInput > button {
-    padding: 1.2vmax;
-  }
-
-  .cartInput > input {
-    width: 5vmax;
-    padding: 2vmax;
-    font: 400 2vmax "Roboto";
+    height: auto;
   }
 
   .cartSubtotal {
-    padding: 1.5vmax;
-    height: 20vmax;
-    font: 300 2vmax "Roboto";
+    padding: 0;
+    height: auto;
+    font-size: 0.95rem;
   }
 
   .cartGrossProfit {
-    display: grid;
-    grid-template-columns: 0fr 2fr;
+    align-items: stretch;
+    width: 100%;
   }
 
   .cartGrossProfitBox {
-    padding: 2vmax;
-    font: 300 2vmax "Roboto";
+    width: 100%;
+    margin: 1rem 0 0 0;
+    font-size: 1rem;
   }
 
-  .checkOutBtn > button {
-    padding: 2vmax 4vmax;
+  .checkOutBtn {
     width: 100%;
-    font: 300 2vmax "Roboto";
+  }
+  
+  .checkOutBtn > button {
+    margin: 0 !important;
+    font-size: 0.9rem !important;
   }
 }

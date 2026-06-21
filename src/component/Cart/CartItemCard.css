@@ -1,59 +1,78 @@
 .CartItemCard {
   display: flex;
-  padding: 1vmax;
-  height: 8vmax;
-  align-items: flex-start;
+  padding: 1vmax 0;
+  align-items: center;
   box-sizing: border-box;
+  gap: 1.5rem;
 }
 .CartItemCard > img {
-  width: 5vmax;
+  width: 70px;
+  height: 70px;
+  object-fit: cover;
+  border-radius: 4px;
 }
 
 .CartItemCard > div {
   display: flex;
-  margin: 0.3vmax 1vmax;
   flex-direction: column;
+  gap: 4px;
 }
 
 .CartItemCard > div > a {
-  font: 300 0.9vmax cursive;
-  color: rgba(24, 24, 24, 0.815);
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #0f172a;
   text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.CartItemCard > div > a:hover {
+  color: #eb4034;
 }
 
 .CartItemCard > div > span {
-  font: 300 0.9vmax "Roboto";
-  color: rgba(24, 24, 24, 0.815);
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.85rem;
+  color: #64748b;
 }
 
-.CartItemCard > div > p {
-  color: tomato;
-  font: 100 0.8vmax "Roboto";
+.removeBtn {
+  color: #eb4034;
+  font-family: 'Roboto', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 500;
   cursor: pointer;
+  background: none;
+  border: none;
+  text-align: left;
+  padding: 0;
+  transition: color 0.3s ease;
+  width: fit-content;
 }
 
-@media screen and (max-width: 600px) {
+.removeBtn:hover {
+  color: #0f172a;
+}
+
+@media screen and (max-width: 768px) {
   .CartItemCard {
-    padding: 3vmax;
-    height: 25vmax;
+    gap: 12px;
   }
   .CartItemCard > img {
-    width: 10vmax;
-  }
-
-  .CartItemCard > div {
-    margin: 1vmax 2vmax;
+    width: 50px;
+    height: 50px;
   }
 
   .CartItemCard > div > a {
-    font: 300 2vmax cursive;
+    font-size: 0.85rem;
   }
 
   .CartItemCard > div > span {
-    font: 300 1.9vmax "Roboto";
+    font-size: 0.75rem;
   }
 
-  .CartItemCard > div > p {
-    font: 100 1.8vmax "Roboto";
+  .removeBtn {
+    font-size: 0.75rem;
   }
 }
